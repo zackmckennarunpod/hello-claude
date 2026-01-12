@@ -72,7 +72,21 @@ Read these in order (skip completed steps):
 7. `steps/07-gastown.md` - Multi-agent workspaces
 8. `steps/08-linear-and-mcp.md` - Linear, Beads sync, Linear MCP, Notion MCP
 9. `steps/09-playwright.md` - Browser automation with Playwright
-10. `steps/10-gcalcli.md` - Google Calendar CLI
+10. `steps/10-gcalcli.md` - Google Calendar CLI **[OPTIONAL]**
+11. `steps/11-terminal-power-tools.md` - Terminal power tools (fzf, bat, eza, jq, httpie) **[QUICK]**
+
+### Handling Optional vs Quick Steps
+
+**For OPTIONAL steps (like gcalcli):**
+- Always ask the user first before starting the step
+- Say something like: "Would you like to set up [tool]? This is optional and takes ~X minutes. You can always do this later by asking me to 'set up [tool]'."
+- If they decline, skip entirely and move on
+- The user can request optional setups anytime by saying "set up gcalcli later" or similar
+
+**For QUICK steps (like terminal power tools):**
+- These are recommended for everyone
+- They install fast (~30 seconds) and provide immediate value
+- Still mention what you're about to do, but proceed unless they object
 
 ### Phase 3: Interactive Learning
 
@@ -104,6 +118,13 @@ which claude
 
 # gcalcli
 which gcalcli
+
+# Terminal power tools
+fzf --version
+bat --version
+eza --version
+jq --version
+http --version
 ```
 
 ## Handling Problems
@@ -166,11 +187,14 @@ GitHub: https://github.com/steveyegge/gastown
 
 When guiding users through gcalcli setup (step 10), this requires an **interactive OAuth walkthrough**. The user must complete several steps in Google Cloud Console that Claude cannot do for them.
 
+**IMPORTANT**: This step is OPTIONAL. Always ask the user first if they want to set it up.
+
 **IMPORTANT**: Walk through the OAuth setup step-by-step, waiting for user confirmation at each step:
 
-1. **Read the step file**: `steps/10-gcalcli.md`
-2. **Install gcalcli**: `brew install gcalcli`
-3. **Guide OAuth setup interactively**:
+1. **Ask if they want to set up gcalcli** - This is optional!
+2. **Read the step file**: `steps/10-gcalcli.md`
+3. **Install gcalcli**: `brew install gcalcli`
+4. **Guide OAuth setup interactively**:
    - Tell the user to open https://console.cloud.google.com/
    - Wait for them to confirm they're logged in
    - Guide them through creating/selecting a project
@@ -183,8 +207,8 @@ When guiding users through gcalcli setup (step 10), this requires an **interacti
    - Wait for confirmation that they have Client ID and Secret
    - Tell them to run `gcalcli init` and paste their credentials
    - Wait for confirmation that browser auth completed
-4. **Verify it works**: Have them run `gcalcli agenda`
-5. **Show common commands**: Quick reference from the step file
+5. **Verify it works**: Have them run `gcalcli agenda`
+6. **Show common commands**: Quick reference from the step file
 
 **Key points for interactive setup**:
 - Never assume a step is complete - always ask for confirmation

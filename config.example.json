@@ -19,6 +19,7 @@
       "notion_mcp": true,
       "playwright": true,
       "gcalcli": true,
+      "terminal_power_tools": true,
       "figma_mcp": false,
       "database_tools": false,
       "docker": false,

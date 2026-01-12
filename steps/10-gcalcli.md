@@ -1,4 +1,10 @@
-# Step 10: Google Calendar CLI (gcalcli)
+# Step 10: Google Calendar CLI (gcalcli) [OPTIONAL]
+
+> **This step is optional and takes ~5 minutes.**
+> 
+> Ask the user: "Would you like to set up Google Calendar CLI? This lets you check your calendar and add events from the terminal. It takes about 5 minutes to set up OAuth. You can always do this later by asking me to 'set up gcalcli'."
+>
+> If they say no or later, skip this step entirely.
 
 ## What is gcalcli?
 
