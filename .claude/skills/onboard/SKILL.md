@@ -354,5 +354,12 @@ Once all steps are done:
 4. Show them how to use Claude Code in tmux
 5. Point them to `reference/tmux-cheatsheet.md` for later
 6. **Check their role and suggest additional tools** (see Role-Based Recommendations)
+7. **Offer to set up Claude Code best practices**: Use `/setup-claude-project` skill
+
+Say: "Now that your environment is ready, would you like to learn how to set up
+Claude Code best practices for your projects? This includes creating CLAUDE.md
+files, custom skills, and workflows that make Claude more effective."
+
+If yes, invoke the `/setup-claude-project` skill.
 
 Remember: The goal isn't just to install things. It's to help them feel confident and excited about their new setup.
