@@ -83,107 +83,53 @@ bd sync --push
 
 MCP (Model Context Protocol) tools extend Claude Code to interact with external services.
 
-### Install Linear MCP
+Use the `claude mcp add` CLI command to configure MCP servers. Configuration is stored in `~/.claude.json`.
 
-The Linear MCP tool lets Claude Code read and create Linear issues directly.
+### Add Linear MCP
 
-```bash
-# Install the Linear MCP server
-npm install -g @anthropic/mcp-server-linear
-```
-
-### Configure Claude Code for Linear MCP
-
-Add to your Claude Code config (`~/.config/claude-code/settings.json`):
-
-```json
-{
-  "mcpServers": {
-    "linear": {
-      "command": "mcp-server-linear",
-      "env": {
-        "LINEAR_API_KEY": "your-linear-api-key"
-      }
-    }
-  }
-}
-```
-
-Or create/update the config:
+Linear's official MCP uses browser OAuth - no API key needed!
 
 ```bash
-mkdir -p ~/.config/claude-code
-
-cat > ~/.config/claude-code/settings.json << 'EOF'
-{
-  "mcpServers": {
-    "linear": {
-      "command": "mcp-server-linear",
-      "env": {
-        "LINEAR_API_KEY": "${LINEAR_API_KEY}"
-      }
-    }
-  }
-}
-EOF
+# Add Linear MCP globally (available in all projects)
+claude mcp add --transport http linear https://mcp.linear.app/mcp --scope user
 ```
 
-### Install Notion MCP
+### Add Notion MCP
 
-The Notion MCP tool lets Claude Code read and update Notion pages.
+Notion's official MCP also uses browser OAuth - no API key or integration setup needed!
 
 ```bash
-# Install the Notion MCP server
-npm install -g @anthropic/mcp-server-notion
+# Add Notion MCP globally (available in all projects)
+claude mcp add --transport http notion https://mcp.notion.com/mcp --scope user
 ```
 
-### Get Notion API Key
-
-1. Go to: https://www.notion.so/my-integrations
-2. Create a new integration
-3. Copy the "Internal Integration Token"
-4. Share your Notion pages/databases with the integration
-
-### Configure Claude Code for Notion MCP
-
-Update your Claude Code config:
-
-```json
-{
-  "mcpServers": {
-    "linear": {
-      "command": "mcp-server-linear",
-      "env": {
-        "LINEAR_API_KEY": "${LINEAR_API_KEY}"
-      }
-    },
-    "notion": {
-      "command": "mcp-server-notion",
-      "env": {
-        "NOTION_API_KEY": "${NOTION_API_KEY}"
-      }
-    }
-  }
-}
-```
-
-### Set Environment Variables
-
-Add to `~/.zshrc.local`:
+### Verify MCP Servers
 
 ```bash
-# Linear
-export LINEAR_API_KEY="lin_api_xxxxx"
-
-# Notion
-export NOTION_API_KEY="secret_xxxxx"
+claude mcp list
 ```
 
-Then reload:
-
-```bash
-source ~/.zshrc
+You should see:
 ```
+linear: https://mcp.linear.app/mcp (HTTP) - ✓ Connected
+notion: https://mcp.notion.com/mcp (HTTP) - ⚠ Needs authentication
+```
+
+### Authenticate MCP Servers
+
+For servers showing "Needs authentication":
+
+1. Start a new Claude Code session: `claude`
+2. Type `/mcp` to open the MCP authentication menu
+3. Follow the browser prompts to log in
+
+### MCP Scopes
+
+| Scope | Flag | Config Location | Use Case |
+|-------|------|-----------------|----------|
+| User | `--scope user` | `~/.claude.json` | Available in all projects |
+| Project | `--scope project` | `.mcp.json` in project root | Shared with team via git |
+| Local | (default) | `~/.claude.json` (per-project) | Only this project, not shared |
 
 ## Part 4: Using the Integrations
 
@@ -219,18 +165,18 @@ source ~/.zshrc
 
 - [ ] `bd --version` works
 - [ ] `bd init` in a test project succeeds
-- [ ] LINEAR_API_KEY is set in environment
-- [ ] NOTION_API_KEY is set in environment
-- [ ] Claude Code recognizes the MCP tools (restart Claude after config)
+- [ ] `claude mcp list` shows Linear and Notion
+- [ ] Linear shows "Connected" or authenticated via `/mcp`
+- [ ] Notion shows "Connected" or authenticated via `/mcp`
 - [ ] `bd sync` connects to Linear (if you have access)
 
 ## Troubleshooting
 
 ### MCP tools not working?
 
-1. Restart Claude Code after changing config
-2. Check environment variables are set: `echo $LINEAR_API_KEY`
-3. Verify the MCP server is installed: `which mcp-server-linear`
+1. Verify servers are configured: `claude mcp list`
+2. Start a fresh Claude Code session
+3. Authenticate via `/mcp` if needed
 
 ### Beads sync failing?
 
