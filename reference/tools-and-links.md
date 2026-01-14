@@ -225,33 +225,28 @@ npm install -g @beads/bd
 
 ## Linear MCP Server
 
-- **npm**: `@anthropic/mcp-server-linear` (or check latest package name)
+- **Official MCP**: https://mcp.linear.app/mcp
 - **MCP Docs**: https://docs.anthropic.com/en/docs/claude-code/mcp
 
-### Installation
+### Installation (OAuth - Recommended)
 ```bash
-npm install -g @anthropic/mcp-server-linear
+claude mcp add --transport http linear https://mcp.linear.app/mcp --scope user
 ```
 
-### Configuration
-Add to `~/.config/claude-code/settings.json`:
-```json
-{
-  "mcpServers": {
-    "linear": {
-      "command": "mcp-server-linear",
-      "env": {
-        "LINEAR_API_KEY": "${LINEAR_API_KEY}"
-      }
-    }
-  }
-}
+### Authentication
+1. In Claude Code, type `/mcp`
+2. Select Linear
+3. Complete browser OAuth flow
+
+### Verify
+```bash
+claude mcp list
 ```
 
 ### Common Issues
 - **Not recognized**: Restart Claude Code after config changes
-- **Auth errors**: Check LINEAR_API_KEY is set
-- **Command not found**: Verify npm global install path
+- **Auth required**: Use `/mcp` in Claude Code to authenticate
+- **Re-authenticate**: `claude mcp remove linear` then add again
 
 ---
 
@@ -260,50 +255,39 @@ Add to `~/.config/claude-code/settings.json`:
 - **Website**: https://notion.so
 - **API Docs**: https://developers.notion.com
 - **API Reference**: https://developers.notion.com/reference
-- **Integrations**: https://www.notion.so/my-integrations
-
-### API Key Setup
-1. Go to https://www.notion.so/my-integrations
-2. Create new integration
-3. Copy "Internal Integration Token"
-4. Share pages/databases with integration
-
-### Common Issues
-- **Access denied**: Share page with integration in Notion
-- **Page not found**: Check integration has access
-- **Rate limits**: Notion has rate limits (3 req/sec)
 
 ---
 
 ## Notion MCP Server
 
-- **npm**: `@anthropic/mcp-server-notion` (or check latest package name)
+- **Official MCP**: https://mcp.notion.com/mcp
 - **MCP Docs**: https://docs.anthropic.com/en/docs/claude-code/mcp
 
-### Installation
+### Installation (OAuth - Recommended)
+
+> **Note**: The API key approach requires workspace admin access to create integrations.
+> OAuth works for everyone and is the recommended approach.
+
 ```bash
-npm install -g @anthropic/mcp-server-notion
+claude mcp add --transport http notion https://mcp.notion.com/mcp --scope user
 ```
 
-### Configuration
-Add to `~/.config/claude-code/settings.json`:
-```json
-{
-  "mcpServers": {
-    "notion": {
-      "command": "mcp-server-notion",
-      "env": {
-        "NOTION_API_KEY": "${NOTION_API_KEY}"
-      }
-    }
-  }
-}
+### Authentication
+1. In Claude Code, type `/mcp`
+2. Select Notion
+3. Complete browser OAuth flow
+4. Grant access to pages you want Claude to see
+
+### Verify
+```bash
+claude mcp list
 ```
 
 ### Common Issues
-- **Not recognized**: Restart Claude Code
-- **Auth errors**: Check NOTION_API_KEY is set
-- **No results**: Ensure pages are shared with integration
+- **Not recognized**: Restart Claude Code after config changes
+- **Auth required**: Use `/mcp` in Claude Code to authenticate
+- **Re-authenticate**: `claude mcp remove notion` then add again
+- **Can't see pages**: OAuth only grants access to pages you explicitly approve
 
 ---
 
@@ -408,17 +392,17 @@ brew install --cask font-jetbrains-mono-nerd-font
 Store sensitive keys in `~/.zshrc.local`:
 
 ```bash
-# Linear
-export LINEAR_API_KEY="lin_api_xxxxx"
-
-# Notion
-export NOTION_API_KEY="secret_xxxxx"
-
-# Anthropic (if needed)
+# Anthropic (if needed for API access)
 export ANTHROPIC_API_KEY="sk-ant-xxxxx"
+
+# Linear API Key (only needed for Beads sync, not MCP)
+export LINEAR_API_KEY="lin_api_xxxxx"
 ```
 
 Then: `source ~/.zshrc`
+
+> **Note**: Linear and Notion MCPs use browser OAuth - no API keys needed!
+> The LINEAR_API_KEY is only required for Beads' `bd linear sync` feature.
 
 ---
 
@@ -440,11 +424,9 @@ npm --version
 go version
 npx playwright --version
 
-# Check environment variables
-echo $LINEAR_API_KEY
-echo $NOTION_API_KEY
-echo $PATH
+# Check MCP servers
+claude mcp list
 
-# Check MCP config
-cat ~/.config/claude-code/settings.json
+# Check PATH
+echo $PATH
 ```
