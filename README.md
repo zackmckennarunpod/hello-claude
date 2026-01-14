@@ -15,14 +15,12 @@ Like LazyVim, but for terminal-based AI agent workflows. Get a beautiful, produc
    cd lazy-agent
    ```
 
-3. **Create your personalized config** (choose one):
+3. **Run the setup wizard**:
+   ```bash
+   ./setup.sh
+   ```
 
-   **Option A: Let Notion fill it out for you (recommended)**
-   - Copy the contents of `config.example.json` into a new Notion page
-   - Ask Claude with Notion MCP: "Look at my Notion profile and fill out this config for me"
-   - Save the result as `config.json` in this directory
-
-   **Option B: Manual setup**
+   Or manually:
    ```bash
    cp config.example.json config.json
    # Edit config.json with your name and preferences
@@ -71,6 +69,8 @@ Then open http://localhost:3000 in your browser.
 
 ```
 lazy-agent/
+├── setup.sh            # Interactive setup wizard
+├── update.sh           # Pull updates and refresh configs
 ├── CLAUDE.md           # Instructions for Claude (the wizard brain)
 ├── config.example.json # Example config (copy to config.json)
 ├── README.md           # You are here
@@ -106,6 +106,27 @@ If Claude Code isn't installed yet, you can:
 - Follow the steps manually in `steps/` directory
 - Check out the [Claude Code documentation](https://docs.anthropic.com/claude-code)
 
+## Updating
+
+Pull the latest changes and update your configs:
+
+```bash
+./update.sh
+```
+
+This will:
+- Pull latest from the repo
+- Show what changed
+- Optionally re-install dotfiles if they were updated
+
 ## Contributing
 
 PRs welcome! This is meant to evolve as the tools change.
+
+## Philosophy
+
+Like LazyVim, we believe:
+- **Sensible defaults** - Works out of the box
+- **Opinionated but configurable** - We made choices, but you can change them
+- **Self-contained** - One repo, everything you need
+- **Evolvable** - The tools change, so should this
