@@ -26,19 +26,24 @@ tmux -V
 
 ## Apply Configuration
 
-We'll use the dotfiles tmux config which has vim-style bindings.
+We'll use the included tmux config which has vim-style bindings.
 
 ```bash
-# Link the config from dotfiles (RECOMMENDED)
-ln -sf ~/Developer/.dotfiles/.tmux.conf ~/.tmux.conf
+# Run the dotfiles installer
+./dotfiles/install.sh
+
+# Or link manually
+ln -sf "$(pwd)/dotfiles/.tmux.conf" ~/.tmux.conf
 ```
 
-The dotfiles config includes:
+The included config features:
+- **Prefix: `Ctrl+A`** (easier to reach than Ctrl+B, especially with Caps Lock as Ctrl)
 - `Ctrl+h/j/k/l` for vim-style pane navigation
 - `|` and `-` for intuitive splits
 - Neovim integration (seamless navigation between vim and tmux)
 - Mouse support
-- Sensible defaults
+- FZF session picker
+- LazyGit integration
 
 If you want to see what's in it or create your own:
 
@@ -92,11 +97,13 @@ EOF
 
 ### The Prefix Key
 
-Almost all tmux commands start with the **prefix key**: `Ctrl+b`
+Almost all tmux commands start with the **prefix key**: `Ctrl+A`
 
-You press `Ctrl+b`, release, then press the next key.
+You press `Ctrl+A`, release, then press the next key.
 
-Example: To split vertically, press `Ctrl+b`, release, press `|`
+Example: To split vertically, press `Ctrl+A`, release, press `|`
+
+> **Tip**: With Karabiner installed (step 13), you can use `Caps Lock + A` as the prefix - much easier!
 
 ### Sessions, Windows, Panes
 
@@ -127,7 +134,7 @@ tmux ls
 tmux attach -t myproject
 
 # Detach from session (keep it running)
-# Press: Ctrl+b d
+# Press: Ctrl+A d
 ```
 
 ### Pane Management
@@ -173,24 +180,24 @@ You're now inside tmux! Notice the green bar at the bottom.
 
 ### Exercise 2: Split Panes
 
-1. Press `Ctrl+b` then `|` (vertical split)
-2. Press `Ctrl+b` then `-` (horizontal split)
+1. Press `Ctrl+A` then `|` (vertical split)
+2. Press `Ctrl+A` then `-` (horizontal split)
 3. Navigate: `Ctrl+h` (left), `Ctrl+l` (right), `Ctrl+j` (down), `Ctrl+k` (up)
 
 ### Exercise 3: Zoom
 
-1. Press `Ctrl+b` then `m` to zoom current pane
+1. Press `Ctrl+A` then `m` to zoom current pane
 2. Press again to unzoom
 
 ### Exercise 4: Windows
 
-1. Press `Ctrl+b` then `c` (new window)
+1. Press `Ctrl+A` then `c` (new window)
 2. Notice the status bar shows `[0] [1]`
-3. Press `Ctrl+b` then `0` to go back to first window
+3. Press `Ctrl+A` then `0` to go back to first window
 
 ### Exercise 5: Detach and Reattach
 
-1. Press `Ctrl+b` then `d` (detach)
+1. Press `Ctrl+A` then `d` (detach)
 2. You're back in regular terminal
 3. Run `tmux ls` to see your session
 4. Run `tmux attach -t learning` to go back
@@ -207,19 +214,19 @@ tmux new -s myapp
 # (already here)
 
 # Create Window 1: Server
-Ctrl+b c
+Ctrl+A c
 npm run dev
 
 # Create Window 2: Git/misc
-Ctrl+b c
+Ctrl+A c
 
 # Navigate between windows
-Ctrl+b 0  # Editor
-Ctrl+b 1  # Server
-Ctrl+b 2  # Git
+Ctrl+A 0  # Editor
+Ctrl+A 1  # Server
+Ctrl+A 2  # Git
 
 # In editor window, split for tests
-Ctrl+b |
+Ctrl+A |
 npm test --watch
 ```
 
@@ -246,7 +253,7 @@ tmux source-file ~/.tmux.conf
 The config enables mouse, but you need to reload:
 ```bash
 # Inside tmux, press:
-Ctrl+b r
+Ctrl+A r
 ```
 
 ### Colors look wrong?

@@ -33,25 +33,22 @@ After installation, you'll need to grant permissions:
 ls /Applications/Karabiner-Elements.app && echo "Karabiner: installed"
 ```
 
-## Configuration from Dotfiles
+## Configuration
 
-The dotfiles already include a Karabiner config. The install script will set it up:
-
-```bash
-# Run the dotfiles installer (if not already done)
-~/Developer/.dotfiles/install.sh
-```
-
-Or manually symlink just the Karabiner config:
+The included Karabiner config sets up the Caps Lock magic. Install it:
 
 ```bash
+# Run the dotfiles installer with Karabiner
+./dotfiles/install.sh --with-karabiner
+
+# Or manually symlink
 mkdir -p ~/.config/karabiner
-ln -sf ~/Developer/.dotfiles/.config/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
+ln -sf "$(pwd)/dotfiles/.config/karabiner/karabiner.json" ~/.config/karabiner/karabiner.json
 ```
 
 ### What the Config Does
 
-The dotfiles Karabiner config at `~/.dotfiles/.config/karabiner/karabiner.json` includes:
+The included Karabiner config provides:
 
 1. **Caps Lock → Ctrl/Escape**
    - Tap Caps Lock = Escape
@@ -132,21 +129,21 @@ Caps+A, m
 
 ### Config not loading?
 
-Re-run the dotfiles installer:
+Re-run the installer:
 ```bash
-~/Developer/.dotfiles/install.sh
+./dotfiles/install.sh --with-karabiner
 ```
 
 Or manually symlink:
 ```bash
-ln -sf ~/Developer/.dotfiles/.config/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
+ln -sf "$(pwd)/dotfiles/.config/karabiner/karabiner.json" ~/.config/karabiner/karabiner.json
 ```
 
 ### Want to customize further?
 
-Edit the dotfiles config directly:
+Edit the config directly:
 ```bash
-vim ~/Developer/.dotfiles/.config/karabiner/karabiner.json
+vim dotfiles/.config/karabiner/karabiner.json
 ```
 
 Or use Karabiner-Elements GUI to add rules, then copy the changes back to dotfiles.

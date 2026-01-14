@@ -7,8 +7,8 @@
     "team": "platform"
   },
   "dotfiles": {
-    "repo": "https://github.com/zackmckennarunpod/.dotfiles",
-    "local_path": "~/Developer/.dotfiles"
+    "use_included": true,
+    "install_karabiner": false
   },
   "setup": {
     "skip_steps": [],

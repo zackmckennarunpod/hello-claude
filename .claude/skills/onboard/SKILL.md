@@ -225,21 +225,22 @@ If something fails:
 
 ## Important Dotfiles Reference
 
-Dotfiles repo: https://github.com/zackmckennarunpod/.dotfiles
+Dotfiles are included in this repo at `dotfiles/`:
 
-Clone them first if not already present:
-```bash
-git clone https://github.com/zackmckennarunpod/.dotfiles ~/Developer/.dotfiles
+```
+dotfiles/
+├── .tmux.conf                        # Tmux config (Ctrl+A prefix, vim bindings)
+├── .config/ghostty/config            # Ghostty terminal settings
+├── .config/karabiner/karabiner.json  # Caps Lock → Escape/Ctrl (optional)
+├── install.sh                        # Installer script
+└── README.md                         # Dotfiles documentation
 ```
 
-Reference these for:
-
-- `.tmux.conf` - Tmux configuration with vim-style bindings
-- `.zshrc` - Zsh configuration
-- `.p10k.zsh` - Powerlevel10k theme
-- `install.sh` - Automated installation script
-
-When setting up, we'll symlink from the dotfiles repo to the home directory.
+Install with:
+```bash
+./dotfiles/install.sh                  # Basic install
+./dotfiles/install.sh --with-karabiner # Include Karabiner config
+```
 
 ## Tmux Tutorial Server
 

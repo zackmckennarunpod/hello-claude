@@ -58,21 +58,14 @@ git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 ```
 
-## Clone the Dotfiles
+## Dotfiles (Included)
 
-We'll use Zack's dotfiles for tmux, zsh, and other configs:
-
-```bash
-mkdir -p ~/Developer
-git clone https://github.com/zackmckennarunpod/.dotfiles ~/Developer/.dotfiles
-```
-
-The dotfiles include:
-- `.tmux.conf` - tmux with vim-style navigation
-- `.zshrc` - Zsh configuration
-- `.p10k.zsh` - Powerlevel10k prompt theme
+This repo includes starter dotfiles in the `dotfiles/` directory:
+- `.tmux.conf` - tmux with vim-style navigation and Ctrl+A prefix
 - `.config/ghostty/config` - Ghostty terminal config
-- `install.sh` - Automated setup script
+- `.config/karabiner/karabiner.json` - Caps Lock → Escape/Ctrl (optional)
+
+We'll install these in later steps.
 
 ## Verification Checklist
 
@@ -80,8 +73,7 @@ The dotfiles include:
 - [ ] `git --version` shows version number
 - [ ] `git config user.name` shows your name
 - [ ] `git config user.email` shows your email
-- [ ] `ls ~/Developer/.dotfiles` shows the dotfiles
 
 ## Next Step
 
-Once Homebrew, Git, and dotfiles are ready, we'll install Ghostty - a beautiful, fast terminal.
+Once Homebrew and Git are ready, we'll install Ghostty - a beautiful, fast terminal.

@@ -1,6 +1,6 @@
-# Hello Claude - Claude Code Onboarding
+# Lazy Agent - Terminal Environment for AI Agents
 
-A self-guided wizard to set up your development environment, powered by Claude Code.
+Like LazyVim, but for terminal-based AI agent workflows. Get a beautiful, productive terminal setup in minutes.
 
 ## Quick Start
 
@@ -11,8 +11,8 @@ A self-guided wizard to set up your development environment, powered by Claude C
 
 2. **Clone this repo**:
    ```bash
-   git clone https://github.com/zackmckennarunpod/hello-claude.git
-   cd hello-claude
+   git clone https://github.com/runpod/lazy-agent.git
+   cd lazy-agent
    ```
 
 3. **Create your personalized config** (choose one):
@@ -37,14 +37,15 @@ Claude will read your config and guide you through a personalized setup.
 - **Ghostty** - A fast, GPU-accelerated terminal emulator
 - **Zsh + Oh My Zsh** - A powerful shell with plugins
 - **Powerlevel10k** - A beautiful, informative prompt
-- **tmux** - Terminal multiplexer for managing sessions
+- **tmux** - Terminal multiplexer with vim-style navigation
 - **Claude Code** - AI-powered coding assistant
 - **Gastown** - Multi-agent workspace coordination
 - **Beads** - Git-backed issue tracking with Linear sync
 - **Linear MCP** - Claude Code integration with Linear
 - **Notion MCP** - Claude Code integration with Notion
 - **Playwright** - Browser automation and testing
-- **gcalcli** - Google Calendar CLI for terminal-based scheduling [OPTIONAL]
+- **Karabiner-Elements** - Caps Lock → Escape + tmux prefix [RECOMMENDED]
+- **gcalcli** - Google Calendar CLI [OPTIONAL]
 - **Terminal Power Tools** - fzf, bat, eza, jq, httpie [QUICK]
 
 ## What You'll Learn
@@ -69,10 +70,15 @@ Then open http://localhost:3000 in your browser.
 ## Files in This Repo
 
 ```
-hello-claude/
+lazy-agent/
 ├── CLAUDE.md           # Instructions for Claude (the wizard brain)
 ├── config.example.json # Example config (copy to config.json)
 ├── README.md           # You are here
+├── dotfiles/           # Included configs (tmux, ghostty, karabiner)
+│   ├── .tmux.conf
+│   ├── .config/ghostty/config
+│   ├── .config/karabiner/karabiner.json
+│   └── install.sh
 ├── steps/              # Step-by-step setup guides
 │   ├── 01-prerequisites.md
 │   ├── 02-ghostty.md
@@ -83,17 +89,13 @@ hello-claude/
 │   ├── 07-gastown.md
 │   ├── 08-linear-and-mcp.md
 │   ├── 09-playwright.md
-│   ├── 10-gcalcli.md         # [OPTIONAL] - Claude asks first
-│   ├── 11-terminal-power-tools.md  # [QUICK] - Recommended for all
-│   └── 12-notion-mcp.md          # [RECOMMENDED] - Notion integration
+│   ├── 10-gcalcli.md              # [OPTIONAL]
+│   ├── 11-terminal-power-tools.md # [QUICK]
+│   ├── 12-notion-mcp.md           # [RECOMMENDED]
+│   └── 13-karabiner.md            # [RECOMMENDED] Caps Lock magic
 ├── tmux-tutorial/      # Interactive web tutorial
-│   ├── src/
-│   ├── public/
-│   └── package.json
 ├── exercises/          # Practice projects
-│   └── hello-world/
 └── reference/          # Quick reference cards
-    └── tmux-cheatsheet.md
 ```
 
 ## Need Help?
@@ -104,6 +106,6 @@ If Claude Code isn't installed yet, you can:
 - Follow the steps manually in `steps/` directory
 - Check out the [Claude Code documentation](https://docs.anthropic.com/claude-code)
 
-## Credits
+## Contributing
 
-Dotfiles: https://github.com/zackmckennarunpod/.dotfiles
+PRs welcome! This is meant to evolve as the tools change.

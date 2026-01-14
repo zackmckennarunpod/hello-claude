@@ -22,20 +22,22 @@ export PATH="$HOME/go/bin:$PATH"
 echo "Installing Beads..."
 go install github.com/steveyegge/beads/cmd/bd@latest
 
-# Install MCP servers
-echo "Installing MCP servers..."
-npm install -g @anthropic/mcp-server-linear 2>/dev/null || echo "Linear MCP: install manually if needed"
-npm install -g @anthropic/mcp-server-notion 2>/dev/null || echo "Notion MCP: install manually if needed"
-
 # Install Playwright
 echo "Installing Playwright..."
 npm install -g playwright
 npx playwright install chromium --with-deps 2>/dev/null || echo "Playwright browsers: install manually if needed"
 
-# Clone the dotfiles repo
-echo "Cloning dotfiles..."
-mkdir -p ~/Developer
-git clone https://github.com/zackmckennarunpod/.dotfiles ~/Developer/.dotfiles 2>/dev/null || echo "Dotfiles already cloned or unavailable"
+# Install dotfiles from this repo
+echo "Installing dotfiles..."
+if [ -f "./dotfiles/install.sh" ]; then
+    ./dotfiles/install.sh
+else
+    echo "Dotfiles not found in current directory"
+fi
+
+# Note: MCP servers (Linear, Notion) use OAuth and are added via:
+#   claude mcp add --transport http linear https://mcp.linear.app/mcp --scope user
+#   claude mcp add --transport http notion https://mcp.notion.com/mcp --scope user
 
 echo ""
 echo "========================================="
@@ -47,8 +49,12 @@ echo "  - tmux, zsh"
 echo "  - Claude Code"
 echo "  - Gastown (gt)"
 echo "  - Beads (bd)"
-echo "  - MCP servers (Linear, Notion)"
 echo "  - Playwright"
+echo "  - Dotfiles (tmux, ghostty)"
+echo ""
+echo "MCP servers (run in Claude Code):"
+echo "  claude mcp add --transport http linear https://mcp.linear.app/mcp --scope user"
+echo "  claude mcp add --transport http notion https://mcp.notion.com/mcp --scope user"
 echo ""
 echo "Run: claude"
 echo "Then say: help me get started"
