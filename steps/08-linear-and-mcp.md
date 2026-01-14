@@ -134,87 +134,53 @@ bd linear sync
 
 MCP (Model Context Protocol) tools extend Claude Code to interact with external services directly.
 
-### Linear MCP (Community)
+Use the `claude mcp add` CLI command to configure MCP servers. Configuration is stored in `~/.claude.json`.
 
-The Linear MCP lets Claude Code read and create Linear issues directly.
+### Add Linear MCP
 
-```bash
-# Install community Linear MCP
-npm install -g @mseep/linear-mcp
-```
-
-Add to your Claude Code config (`~/.claude/settings.json`):
-
-```json
-{
-  "mcpServers": {
-    "linear": {
-      "command": "npx",
-      "args": ["-y", "@mseep/linear-mcp"],
-      "env": {
-        "LINEAR_API_KEY": "lin_api_YOUR_KEY"
-      }
-    }
-  }
-}
-```
-
-### Notion MCP (Official)
-
-The official Notion MCP lets Claude Code read and update Notion pages.
+Linear's official MCP uses browser OAuth - no API key needed!
 
 ```bash
-# Install official Notion MCP
-npm install -g @notionhq/notion-mcp-server
+# Add Linear MCP globally (available in all projects)
+claude mcp add --transport http linear https://mcp.linear.app/mcp --scope user
 ```
 
-#### Get Notion API Key
+### Add Notion MCP
 
-1. Go to: https://www.notion.so/my-integrations
-2. Create a new integration
-3. Copy the "Internal Integration Secret"
-4. **Important**: Share your Notion pages/databases with the integration
-
-Add to your Claude Code config:
-
-```json
-{
-  "mcpServers": {
-    "linear": {
-      "command": "npx",
-      "args": ["-y", "@mseep/linear-mcp"],
-      "env": {
-        "LINEAR_API_KEY": "lin_api_YOUR_KEY"
-      }
-    },
-    "notion": {
-      "command": "npx",
-      "args": ["-y", "@notionhq/notion-mcp-server"],
-      "env": {
-        "OPENAPI_MCP_HEADERS": "{\"Authorization\": \"Bearer YOUR_NOTION_SECRET\", \"Notion-Version\": \"2022-06-28\"}"
-      }
-    }
-  }
-}
-```
-
-### Set Environment Variables
-
-Add to `~/.zshrc.local`:
+Notion's official MCP also uses browser OAuth - no API key or integration setup needed!
 
 ```bash
-# Linear
-export LINEAR_API_KEY="lin_api_xxxxx"
-
-# Notion (for scripts, not needed if in MCP config)
-export NOTION_API_KEY="secret_xxxxx"
+# Add Notion MCP globally (available in all projects)
+claude mcp add --transport http notion https://mcp.notion.com/mcp --scope user
 ```
 
-Then reload:
+### Verify MCP Servers
 
 ```bash
-source ~/.zshrc
+claude mcp list
 ```
+
+You should see:
+```
+linear: https://mcp.linear.app/mcp (HTTP) - ✓ Connected
+notion: https://mcp.notion.com/mcp (HTTP) - ⚠ Needs authentication
+```
+
+### Authenticate MCP Servers
+
+For servers showing "Needs authentication":
+
+1. Start a new Claude Code session: `claude`
+2. Type `/mcp` to open the MCP authentication menu
+3. Follow the browser prompts to log in
+
+### MCP Scopes
+
+| Scope | Flag | Config Location | Use Case |
+|-------|------|-----------------|----------|
+| User | `--scope user` | `~/.claude.json` | Available in all projects |
+| Project | `--scope project` | `.mcp.json` in project root | Shared with team via git |
+| Local | (default) | `~/.claude.json` (per-project) | Only this project, not shared |
 
 ## Part 4: Using the Integrations
 
@@ -272,17 +238,16 @@ bd linear sync --push
 
 - [ ] `bd --version` works
 - [ ] `bd init` in a test project succeeds
-- [ ] `bd config set linear.api_key "..."` configured
-- [ ] `bd config set linear.team_id "..."` configured
-- [ ] `bd linear status` shows "Connected"
-- [ ] `bd linear sync --pull --dry-run` shows issues
-- [ ] Claude Code recognizes MCP tools (restart Claude after config changes)
+- [ ] `claude mcp list` shows Linear and Notion
+- [ ] Linear shows "Connected" or authenticated via `/mcp`
+- [ ] Notion shows "Connected" or authenticated via `/mcp`
+- [ ] `bd linear status` shows configured (if using Linear sync)
 
 ## Troubleshooting
 
 ### Beads Linear sync not working?
 
-1. Check both API key AND team ID are set:
+1. Check Beads Linear configuration:
    ```bash
    bd linear status
    ```
