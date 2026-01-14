@@ -77,9 +77,11 @@ Read these in order (skip completed steps):
 4. `steps/04-tmux.md` - Terminal multiplexer
 5. `steps/05-claude-code.md` - Installing and configuring Claude Code
 6. `steps/06-first-project.md` - Hands-on practice
-7. `steps/07-gastown.md` - Multi-agent workspaces
-8. `steps/08-linear-and-mcp.md` - Linear, Beads sync, Linear MCP, Notion MCP
-9. `steps/09-playwright.md` - Browser automation with Playwright
+7. `steps/08-linear-and-mcp.md` - Linear, Beads sync, Linear MCP, Notion MCP
+8. `steps/09-playwright.md` - Browser automation with Playwright
+
+**NOTE**: Gastown (step 07) is NOT part of the normal flow. It is experimental
+and opt-in only. See "Gastown (Experimental)" section below.
 
 ### Phase 3: Interactive Learning
 
@@ -253,9 +255,38 @@ npm run dev
 
 This serves a visual guide to the tmux keybindings configured in the dotfiles.
 
-## Gastown Reference
+## Gastown (Experimental - Opt-In Only)
 
-Gastown (`gt`) manages multi-agent workspaces. Key commands:
+> **DANGER: EXPERIMENTAL MULTI-AGENT SOFTWARE**
+>
+> Gastown gives MULTIPLE AI agents significant autonomy over your codebase.
+> This is NOT part of the standard onboarding flow.
+
+### Before Installing Gastown
+
+**DO NOT offer to install Gastown unless the user EXPLICITLY asks for it.**
+
+If the user asks about Gastown, you MUST:
+
+1. **Explain the risks clearly:**
+   - Multiple AI agents can modify your code simultaneously
+   - Agents may delete, modify, or create files without confirmation
+   - Changes can be difficult to review or revert
+   - Not suitable for production codebases
+
+2. **Require explicit acknowledgement. Ask:**
+   > "Gastown is experimental software that gives AI agents significant control
+   > over your codebase. Before proceeding, please confirm you understand:
+   >
+   > 1. You will ONLY use Gastown on test/sandbox projects
+   > 2. You will ALWAYS work in a git branch you can delete
+   > 3. You accept responsibility for reviewing all agent-generated changes
+   >
+   > Type 'I understand the risks' to proceed."
+
+3. **Only proceed if they type the exact acknowledgement.**
+
+### Gastown Commands (Reference Only)
 
 | Command | Description |
 |---------|-------------|

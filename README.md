@@ -38,7 +38,7 @@ Claude will read your config and guide you through a personalized setup.
 - **Powerlevel10k** - A beautiful, informative prompt
 - **tmux** - Terminal multiplexer for managing sessions
 - **Claude Code** - AI-powered coding assistant
-- **Gastown** - Multi-agent workspace coordination
+- **Gastown** - Multi-agent workspace coordination [EXPERIMENTAL - OPT-IN ONLY]
 - **Beads** - Git-backed issue tracking with Linear sync
 - **Linear MCP** - Claude Code integration with Linear
 - **Notion MCP** - Claude Code integration with Notion
