@@ -1,15 +1,49 @@
-# lazy-tui
+# Lazy Agent
 
-To install dependencies:
+LazyVim-style TUI for AI development environment setup.
+
+## Install
 
 ```bash
+# Clone the repo
+git clone https://github.com/zackmckennarunpod/hello-claude.git
+cd hello-claude/lazy-tui
+
+# Install dependencies
 bun install
+
+# Link globally (makes 'lazy' command available)
+bun link
 ```
 
-To run:
+## Run
 
 ```bash
-bun run index.ts
+lazy
 ```
 
-This project was created using `bun init` in bun v1.2.20. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+Or run directly:
+```bash
+bun run start
+```
+
+## Keybindings
+
+| Key | Action |
+|-----|--------|
+| `t` | Tools browser |
+| `s` | Setup wizard |
+| `c` | Launch Claude Code |
+| `1` | Install core tools |
+| `2` | Install recommended tools |
+| `?` | Help |
+| `q` | Quit |
+
+## Tools Page Navigation
+
+| Key | Action |
+|-----|--------|
+| `h/l` | Switch category tabs |
+| `j/k` | Navigate tools list |
+| `Enter` | Install selected tool |
+| `ESC` | Back to home |
