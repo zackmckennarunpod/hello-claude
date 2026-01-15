@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Lazy Agent TUI - Like LazyVim, but for AI agent dev environments
+cd "$(dirname "$0")/lazy-tui" && bun run index.ts
